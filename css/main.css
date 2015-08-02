@@ -37,3 +37,28 @@ body {
 .carousel ol .selected {
   background-color: #777;
 }
+
+.carousel .left-arrow,
+.carousel .right-arrow {
+  width: 0;
+	height: 0;
+  position: absolute;
+  top: 50%;
+  cursor: pointer;
+}
+.carousel .left-arrow {
+	border-top: 10px solid transparent;
+	border-right: 20px solid #fff;
+	border-bottom: 10px solid transparent;
+  margin-top: -10px;
+  left: 20px;
+}
+
+
+.carousel .right-arrow {
+	border-top: 10px solid transparent;
+	border-left: 20px solid #fff;
+	border-bottom: 10px solid transparent;
+  margin-top: -10px;
+  right: 20px;
+}

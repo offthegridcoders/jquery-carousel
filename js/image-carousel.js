@@ -1,21 +1,23 @@
 $.fn.extend({
-  jqueryCarousel: function(configObject) {
+  simpleCarouselInit: function(configObject) {
 
     if (!configObject.collection) return console.log('No collection exists for carousel! Please check your configurations.'); // exits if no image collection exists
 
     // DEFAULTS
+    configObject.mainClassName = configObject.mainClassName || 'carousel';
     configObject.dotClass = configObject.dotClass || 'dot';
     configObject.useDots = configObject.useDots || true;
     configObject.speed = configObject.speed || 1000;
     configObject.direction = configObject.direction || 'forward';
+    configObject.useArrows = configObject.useArrows || false;
 
     var currentImage = configObject.startingImage || 0; // Starting Image Index
-    var currentSlider = $(this).selector;
+    var Carousel = $('.' + configObject.mainClassName);
 
     // Set Carousel Image by Index
     function setCarouselImage(i) {
       i = i || 0; // selected index or default 0
-      $(currentSlider).css("background-image", "url(" + configObject.collection[i] + ")"); // updates background-image
+      Carousel.css("background-image", "url(" + configObject.collection[i] + ")"); // updates background-image
       if(configObject.useDots) updateDot(); // updates dot if used
       if(configObject.onChange) configObject.onChange();
     };
@@ -68,11 +70,11 @@ $.fn.extend({
         $('ol li:nth-child(' + (currentImage + 1) + ')').addClass('selected'); // adds selected class on current dot
       };
       function appendDots() {
-        $(currentSlider).append('<ol>' + getDots()  + '</ol>');
+        Carousel.append('<ol>' + getDots()  + '</ol>');
       };
       if(configObject.useDots) appendDots();
       $().ready(function() { // CLICKS A DOT
-          $(currentSlider).on('click', 'li', function() {
+          Carousel.on('click', 'li', function() {
             if(configObject.onDotClick) configObject.onDotClick();
             stopCarousel(); // stops carousel
             currentImage = $(this).index(); // changes current image index to clicked dot
@@ -81,6 +83,30 @@ $.fn.extend({
           });
       });
     // END DOTS
+
+    // PERTAINING TO ARROWS
+      function appendArrows() { // ADDS ARROWS TO THE CAROUSEL
+        Carousel.append('<div class="left-arrow"></div>');
+        Carousel.append('<div class="right-arrow"></div>');
+      }
+      function clickArrow(direction) { // ARROW CLICK FUNCTION
+        stopCarousel(); // stops carousel
+        if(direction == 'left') carouselImage.backward();
+        if(direction == 'right') carouselImage.forward();
+        setCarouselImage(currentImage); // changes background image of carousel
+        if(configObject.useDots) updateDot();
+      };
+      $().ready(function() { // CLICKS AN ARROW
+          Carousel.on('click', '.left-arrow', function() {
+            if(configObject.onLeftArrowClick) configObject.onLeftArrowClick();
+            clickArrow('left');
+          });
+          Carousel.on('click', '.right-arrow', function() {
+            if(configObject.onRightArrowClick) configObject.onRightArrowClick();
+            clickArrow('right');
+          });
+      });
+    // END ARROWS
 
     // STARTS CAROUSEL
     function startCarousel() {
@@ -94,6 +120,7 @@ $.fn.extend({
         if(configObject.onStop) configObject.onStop();
     }
 
+    if(configObject.useArrows) appendArrows();
     setCarouselImage(currentImage);
     startCarousel();
   }
