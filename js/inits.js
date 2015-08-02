@@ -3,7 +3,6 @@ var carouselOptions = {
   startingImage: 0, // optional: index of starting image
   dotClass: 'dot', // optional classname for dots
   useDots: true, // optional use dots true/false
-  transitionSpeed: .2, // optional in seconds
   speed: 1000, // optional in milliseconds
   direction: 'forward', // optional: forward/backward/random
   onChange: function() {console.log('Image Changed')}, // Triggered when carousel image changes

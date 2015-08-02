@@ -6,13 +6,11 @@ $.fn.extend({
     // DEFAULTS
     configObject.dotClass = configObject.dotClass || 'dot';
     configObject.useDots = configObject.useDots || true;
-    configObject.transitionSpeed = configObject.transitionSpeed || .2;
     configObject.speed = configObject.speed || 1000;
     configObject.direction = configObject.direction || 'forward';
 
     var currentImage = configObject.startingImage || 0; // Starting Image Index
     var currentSlider = $(this).selector;
-    var defaultTransition = "background-image " + configObject.transitionSpeed + "s";
 
     // Set Carousel Image by Index
     function setCarouselImage(i) {
@@ -55,14 +53,6 @@ $.fn.extend({
       setCarouselImage(currentImage); // sets carousel background image
     }
 
-    // SET CAROUSEL IMAGE TRANSITION
-    function setCarouselTransition(transition) {
-      $(currentSlider).css("-webkit-transition", transition);
-      $(currentSlider).css("-moz-transitionn", transition);
-      $(currentSlider).css("-o-transition", transition);
-      $(currentSlider).css("transition", transition);
-    };
-
     // PERTAINING TO DOTS
       function getDots() { // ADDS DOTS TO THE CAROUSEL
         var dots = '';
@@ -104,7 +94,6 @@ $.fn.extend({
         if(configObject.onStop) configObject.onStop();
     }
 
-    setCarouselTransition(defaultTransition);
     setCarouselImage(currentImage);
     startCarousel();
   }
