@@ -6,14 +6,53 @@
     <title>jQuery Image Carousel</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/main.css">
-
-    <script src="bower_components/jquery/dist/jquery.min.js" type="text/javascript"></script>
-    <script src="js/image-carousel.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="bower_components/jquery-ui/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="css/jquery.otg-carousel.css">
   </head>
 
   <body>
-    <div class="carousel"></div>
-    <script src="js/inits.js" type="text/javascript"></script>
+
+    <header id="carousel"></header>
+    <button id="pause">pause</button>
+    <button id="start">start</button>
+
+    <script src="bower_components/jquery/dist/jquery.min.js" type="text/javascript"></script>
+    <script src="bower_components/jquery-ui/jquery-ui.js" type="text/javascript"></script>
+    <script src="bower_components/jquery-ui/ui/button.js" type="text/javascript"></script>
+    <script src="bower_components/jquery-ui/ui/widget.js" type="text/javascript"></script>
+    <script src="js/jquery.otg-carousel.js" type="text/javascript"></script>
+    <script>
+      $(function() {
+        $('#carousel').carousel({
+          images: [
+            {src: 'images/one.jpg', caption: '<h1>First Image</h1>'},
+            {src: 'images/two.jpg', caption: '<h1>Second Image</h1>'},
+            {src: 'images/three.jpg', caption: '<h1>Third Image</h1>'},
+            {src: 'images/four.jpg', caption: '<h1>Fourth Image</h1>'},
+            {src: 'images/five.jpeg', caption: '<h1>Fifth Image</h1>'},
+            {src: 'images/three.jpg', caption: '<h1>Third Image</h1>'},
+            {src: 'images/four.jpg', caption: '<h1>Fourth Image</h1>'},
+            {src: 'images/five.jpeg', caption: '<h1>Fifth Image</h1>'}
+          ],
+          currentImageIndex: 0,
+          useDots: true,
+          useThumbnails: true,
+          useCaptions: true,
+          useArrows: true,
+          interval: 1000
+        });
+
+        // starts carousel
+          $('#start').click(function() {
+            $('#carousel').carousel('startTimer');
+          });
+
+        // pauses carousel
+          $('#pause').click(function() {
+            $('#carousel').carousel('stopTimer');
+          });
+
+      });
+    </script>
   </body>
 </html>
