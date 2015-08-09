@@ -1,1 +1,1 @@
-#OTGC jquery carousel 
+#OTGC jquery-carousel 
