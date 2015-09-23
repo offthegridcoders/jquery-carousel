@@ -17,7 +17,9 @@
     _create: function () {
       // create markup and default states
         this.element.addClass('otg-carousel');
+
         this._createWrapper();
+
         if(this.options.useDots && this.options.images.length > 1) {
           this._createDots();
         };
@@ -59,9 +61,9 @@
         this.mask.fadeOut('medium');
       };
 
-      this.imageCaption.html(this.options.images[i].caption);
-
       this.previousSlide = i;
+
+      if(this.options.useCaptions) this.imageCaption.html(this.options.images[i].caption);
       if(this.options.useDots) this._setDot(this.options.currentImageIndex);
     },
 
